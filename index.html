@@ -425,14 +425,14 @@
 <p>注意这里的git不是github的desktop</p>
 </blockquote>
 <p>生成ssh_key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;xxxxxx@xxx.com&quot;</div></pre></td></tr></table></figure></p>
-<p>打开id_rsa.pub文件,拿到生成的ssh_key,去coding.net个人设置中SSH key添加<br>完成后配置git账户</p>
+<p>打开id_rsa.pub文件，拿到生成的ssh_key，去coding.net个人设置中SSH key添加<br>完成后配置git账户</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;your_username&quot;  #设置用户名</div><div class="line">$ git config --global user.email &quot;your_registered_Email&quot;  #设置邮箱地址</div></pre></td></tr></table></figure>
-<p>至此,基本环境配置完成。</p>
+<p>至此，基本环境配置完成。</p>
 <hr>
-<h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><h3 id="新建一个文件夹-用于安装和初始化hexo"><a href="#新建一个文件夹-用于安装和初始化hexo" class="headerlink" title="新建一个文件夹,用于安装和初始化hexo"></a>新建一个文件夹,用于安装和初始化hexo</h3><h3 id="在文件夹中安装hexo"><a href="#在文件夹中安装hexo" class="headerlink" title="在文件夹中安装hexo"></a>在文件夹中安装hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g</div></pre></td></tr></table></figure>
+<h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><h3 id="新建一个文件夹，用于安装和初始化hexo"><a href="#新建一个文件夹，用于安装和初始化hexo" class="headerlink" title="新建一个文件夹，用于安装和初始化hexo"></a>新建一个文件夹，用于安装和初始化hexo</h3><h3 id="在文件夹中安装hexo"><a href="#在文件夹中安装hexo" class="headerlink" title="在文件夹中安装hexo"></a>在文件夹中安装hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g</div></pre></td></tr></table></figure>
 <h3 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure>
 <h3 id="hexo设置"><a href="#hexo设置" class="headerlink" title="hexo设置"></a>hexo设置</h3><p>在文件根目录有个叫<code>_config.yml</code>的文件打开把博客基本信息设置<br>在<code>deploy</code>字段里需要设置coding.net的仓库地址</p>
-<p>至此,全部安装工作已经完成！该文件夹就是博客根目录，所有的操作都在里面进行。</p>
+<p>至此，全部安装工作已经完成！该文件夹就是博客根目录，所有的操作都在里面进行。</p>
 <hr>
 <h2 id="本地调试"><a href="#本地调试" class="headerlink" title="本地调试"></a>本地调试</h2><h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure>
 <p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure></p>
