@@ -77,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/favicon.ico?v=5.0.2" />
 
 
 
@@ -92,7 +92,7 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
 简单介绍这次其实主要做了针女 ，网切，心眼，破势 四大追求伤害的御魂对比">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何带着智商玩游戏">
-<meta property="og:url" content="http://onetips.com/2016/10/21/如何带着智商玩游戏/index.html">
+<meta property="og:url" content="http://onetips.com/2016/11/11/如何带着智商玩游戏/index.html">
 <meta property="og:site_name" content="Nexteve's Blog">
 <meta property="og:description" content="前言话说最近很迷阴阳师这款游戏(毕竟是网易爸爸出的，就是良心)
 结果在玩的过程中居然找到了一些游戏之外的乐趣。。
@@ -106,7 +106,7 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
 <meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/1AA7.tmp.jpg">
 <meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/3E73.tmp.jpg">
 <meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/6DDA.tmp.jpg">
-<meta property="og:updated_time" content="2016-11-02T02:16:47.335Z">
+<meta property="og:updated_time" content="2016-11-02T10:46:59.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何带着智商玩游戏">
 <meta name="twitter:description" content="前言话说最近很迷阴阳师这款游戏(毕竟是网易爸爸出的，就是良心)
@@ -136,7 +136,7 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
 
 
 
-  <link rel="canonical" href="http://onetips.com/2016/10/21/如何带着智商玩游戏/"/>
+  <link rel="canonical" href="http://onetips.com/2016/11/11/如何带着智商玩游戏/"/>
 
 
   <title> 如何带着智商玩游戏 | Nexteve's Blog </title>
@@ -291,8 +291,8 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T10:57:06+08:00" content="2016-10-21">
-              2016-10-21
+            <time itemprop="dateCreated" datetime="2016-11-11T11:03:37+08:00" content="2016-11-11">
+              2016-11-11
             </time>
           </span>
 
@@ -302,8 +302,8 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/21/如何带着智商玩游戏/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/如何带着智商玩游戏/" itemprop="commentsCount"></span>
+                <a href="/2016/11/11/如何带着智商玩游戏/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/11/如何带着智商玩游戏/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -354,7 +354,7 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
 <p>第一套是根据暴击率算出期望值，从而直接算出多次的伤害数据。</p>
 <p>第二套是每次攻击都模拟实际情况，最终把这些数据加起来。</p>
 <p>理论上来说，当模拟次数越来越大的时候，这两套算法的结果也会趋近一致。</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">this.ZhenNvCommonResult = (function() &#123; //针女理论总伤害</div><div class="line">	var _BoomCount = Boom * Count;</div><div class="line">	var _HasBoom = _BoomCount * (Attack * 300 * 1.5 / (300 + Protect));</div><div class="line">	var _NotHasBoom = (Count - _BoomCount) * Attack * 300 / (300 + Protect);</div><div class="line">	var _HasZhenNv = _BoomCount * Attack * 0.5 * 1.2;</div><div class="line">	return _HasBoom + _NotHasBoom + _HasZhenNv</div><div class="line">&#125;)();</div><div class="line">this.ZhenNvRealTimeResult = (function() &#123; //针女分次伤害</div><div class="line">	var _RankList = [];</div><div class="line">	for (var i = 0; i &lt; Count; i++) &#123;</div><div class="line">		var _BoomPre = Math.random();</div><div class="line">		var _ZhenNvPre = Math.random();</div><div class="line">		if (Boom &gt; _BoomPre) &#123; //判定为暴击</div><div class="line">			if (_ZhenNvPre &lt; 0.5) &#123; //出针女伤害</div><div class="line">				var _Boomed = Attack * 300 * 1.5 / (300 + Protect);</div><div class="line">				var _HasZhenNv = Attack * 1.2;</div><div class="line">				_RankList.push(_HasZhenNv + _Boomed);</div><div class="line">			&#125; else &#123;</div><div class="line">				var _HasBoom = Attack * 300 * 1.5 / (300 + Protect);</div><div class="line">				_RankList.push(_HasBoom);</div><div class="line">			&#125;</div><div class="line">		&#125; else &#123;</div><div class="line">			var _NotHasBoom = Attack * 300 / (300 + Protect);</div><div class="line">			_RankList.push(_NotHasBoom);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	return _RankList;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.ZhenNvCommonResult = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//针女理论总伤害</span></div><div class="line">	<span class="keyword">var</span> _BoomCount = Boom * Count;</div><div class="line">	<span class="keyword">var</span> _HasBoom = _BoomCount * (Attack * <span class="number">300</span> * <span class="number">1.5</span> / (<span class="number">300</span> + Protect));</div><div class="line">	<span class="keyword">var</span> _NotHasBoom = (Count - _BoomCount) * Attack * <span class="number">300</span> / (<span class="number">300</span> + Protect);</div><div class="line">	<span class="keyword">var</span> _HasZhenNv = _BoomCount * Attack * <span class="number">0.5</span> * <span class="number">1.2</span>;</div><div class="line">	<span class="keyword">return</span> _HasBoom + _NotHasBoom + _HasZhenNv</div><div class="line">&#125;)();</div><div class="line"><span class="keyword">this</span>.ZhenNvRealTimeResult = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//针女分次伤害</span></div><div class="line">	<span class="keyword">var</span> _RankList = [];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; Count; i++) &#123;</div><div class="line">		<span class="keyword">var</span> _BoomPre = <span class="built_in">Math</span>.random();</div><div class="line">		<span class="keyword">var</span> _ZhenNvPre = <span class="built_in">Math</span>.random();</div><div class="line">		<span class="keyword">if</span> (Boom &gt; _BoomPre) &#123; <span class="comment">//判定为暴击</span></div><div class="line">			<span class="keyword">if</span> (_ZhenNvPre &lt; <span class="number">0.5</span>) &#123; <span class="comment">//出针女伤害</span></div><div class="line">				<span class="keyword">var</span> _Boomed = Attack * <span class="number">300</span> * <span class="number">1.5</span> / (<span class="number">300</span> + Protect);</div><div class="line">				<span class="keyword">var</span> _HasZhenNv = Attack * <span class="number">1.2</span>;</div><div class="line">				_RankList.push(_HasZhenNv + _Boomed);</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">var</span> _HasBoom = Attack * <span class="number">300</span> * <span class="number">1.5</span> / (<span class="number">300</span> + Protect);</div><div class="line">				_RankList.push(_HasBoom);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">var</span> _NotHasBoom = Attack * <span class="number">300</span> / (<span class="number">300</span> + Protect);</div><div class="line">			_RankList.push(_NotHasBoom);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> _RankList;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
 <p>其中ZhenNvCommonResult是理论总伤害，ZhenNvRealTimeResult是模拟单次伤害<br>其他三个御魂也很好算。不用多说</p>
 <h3 id="直观"><a href="#直观" class="headerlink" title="直观"></a>直观</h3><p>那这样子看着不直观呀<br>好！<br>那我们搞个折线图来反应一下伤害曲线</p>
 <p>刚好分次伤害出来的数据类型是个Array<br>简单展示的话就整个highchart就好了</p>
@@ -409,17 +409,13 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/13/hello-world/" rel="next" title="我的博客是怎样搭建起来的">
-                <i class="fa fa-chevron-left"></i> 我的博客是怎样搭建起来的
+              <a href="/2016/10/30/commd-git/" rel="next" title="Git常用命令汇总">
+                <i class="fa fa-chevron-left"></i> Git常用命令汇总
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/27/Echarts在地图上添加鼠标交互事件/" rel="prev" title="ECharts在地图上添加鼠标交互事件">
-                ECharts在地图上添加鼠标交互事件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -445,8 +441,8 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/21/如何带着智商玩游戏/"
-           data-title="如何带着智商玩游戏" data-url="http://onetips.com/2016/10/21/如何带着智商玩游戏/">
+      <div class="ds-thread" data-thread-key="2016/11/11/如何带着智商玩游戏/"
+           data-title="如何带着智商玩游戏" data-url="http://onetips.com/2016/11/11/如何带着智商玩游戏/">
       </div>
     
   </div>
@@ -491,7 +487,7 @@ PS:我把OSS也弄好了，这次可以愉快的看图了！
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
