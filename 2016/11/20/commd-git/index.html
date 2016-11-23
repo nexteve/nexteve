@@ -87,22 +87,31 @@
 <meta name="description" content="前言搜集了一些Git一些常用的命令贴出来共勉
 远程仓库
 克隆仓库 $ git clone git@github.com:d3/d3.git
-查看远程仓库 $ git remote -v1234567@requires_authorizationclass SomeClass:    passif __name__ == &apos;__main__&apos;:    # A comment    print &apos;he">
+查看远程仓库 $ git remote -v
+添加远程仓库 $ git remote add [name] [url]
+删除远程仓库 $ git remote rm [name]
+修改远程仓库 $ git remote set-url --push [name">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git常用命令汇总">
-<meta property="og:url" content="http://onetips.com/2016/10/30/commd-git/index.html">
+<meta property="og:url" content="http://onetips.com/2016/11/20/commd-git/index.html">
 <meta property="og:site_name" content="Nexteve's Blog">
 <meta property="og:description" content="前言搜集了一些Git一些常用的命令贴出来共勉
 远程仓库
 克隆仓库 $ git clone git@github.com:d3/d3.git
-查看远程仓库 $ git remote -v1234567@requires_authorizationclass SomeClass:    passif __name__ == &apos;__main__&apos;:    # A comment    print &apos;he">
-<meta property="og:updated_time" content="2016-11-02T10:46:23.139Z">
+查看远程仓库 $ git remote -v
+添加远程仓库 $ git remote add [name] [url]
+删除远程仓库 $ git remote rm [name]
+修改远程仓库 $ git remote set-url --push [name">
+<meta property="og:updated_time" content="2016-11-23T04:34:56.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用命令汇总">
 <meta name="twitter:description" content="前言搜集了一些Git一些常用的命令贴出来共勉
 远程仓库
 克隆仓库 $ git clone git@github.com:d3/d3.git
-查看远程仓库 $ git remote -v1234567@requires_authorizationclass SomeClass:    passif __name__ == &apos;__main__&apos;:    # A comment    print &apos;he">
+查看远程仓库 $ git remote -v
+添加远程仓库 $ git remote add [name] [url]
+删除远程仓库 $ git remote rm [name]
+修改远程仓库 $ git remote set-url --push [name">
 
 
 
@@ -123,7 +132,7 @@
 
 
 
-  <link rel="canonical" href="http://onetips.com/2016/10/30/commd-git/"/>
+  <link rel="canonical" href="http://onetips.com/2016/11/20/commd-git/"/>
 
 
   <title> Git常用命令汇总 | Nexteve's Blog </title>
@@ -278,8 +287,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T00:00:00+08:00" content="2016-10-30">
-              2016-10-30
+            <time itemprop="dateCreated" datetime="2016-11-20T00:00:00+08:00" content="2016-11-20">
+              2016-11-20
             </time>
           </span>
 
@@ -289,8 +298,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/30/commd-git/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/commd-git/" itemprop="commentsCount"></span>
+                <a href="/2016/11/20/commd-git/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/20/commd-git/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -316,8 +325,87 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>搜集了一些Git一些常用的命令贴出来<br>共勉</p>
 <h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><ul>
 <li>克隆仓库 <code>$ git clone git@github.com:d3/d3.git</code></li>
-<li>查看远程仓库 <code>$ git remote -v</code><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@requires_authorization</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># A comment</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'hello world'</span></div></pre></td></tr></table></figure></li>
+<li>查看远程仓库 <code>$ git remote -v</code></li>
+<li>添加远程仓库 <code>$ git remote add [name] [url]</code></li>
+<li>删除远程仓库 <code>$ git remote rm [name]</code></li>
+<li>修改远程仓库 <code>$ git remote set-url --push [name] [newUrl]</code></li>
+<li>拉取远程仓库 <code>$ git pull [remoteName] [localBranchName]</code></li>
+<li>推送远程仓库 <code>$ git push [remoteName] [localBranchName]</code></li>
+<li>如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，如下：<br>$ git push origin test:master             // 提交本地test分支作为远程的master分支<br>$ git push origin test:test              // 提交本地test分支作为远程的test分支</li>
 </ul>
+<a id="more"></a>
+<h2 id="分支-branch-操作相关命令"><a href="#分支-branch-操作相关命令" class="headerlink" title="分支(branch)操作相关命令"></a>分支(branch)操作相关命令</h2><ul>
+<li>查看本地分支 <code>$ git branch</code></li>
+<li>查看远程分支 <code>$ git branch -r</code><blockquote>
+<p>（如果还是看不到就先 git fetch origin 先）</p>
+</blockquote>
+</li>
+<li>创建本地分支 <code>$ git branch [name]</code> <blockquote>
+<p>—-注意新分支创建后不会自动切换为当前分支</p>
+</blockquote>
+</li>
+<li>切换分支 <code>$ git checkout [name]</code></li>
+<li>创建新分支并立即切换到新分支 <code>$ git checkout -b [name]</code></li>
+<li>直接检出远程分支 <code>$ git checkout -b [name] [remoteName]</code> <blockquote>
+<p>(如：git checkout -b myNewBranch origin/dragon)</p>
+</blockquote>
+</li>
+<li>删除分支 <code>$ git branch -d [name]</code><blockquote>
+<p>d选项只能删除已经参与了合并的分支，对于未有合并的分支是无法删除的。如果想强制删除一个分支，可以使用-D选项</p>
+</blockquote>
+</li>
+<li>合并分支 <code>$ git merge [name]</code> <blockquote>
+<p>—-将名称为[name]的分支与当前分支合并</p>
+</blockquote>
+</li>
+<li>合并最后的2个提交 <code>$ git rebase -i HEAD~2</code><blockquote>
+<p>数字2按需修改即可（如果需提交到远端$ git push -f origin master 慎用！）</p>
+</blockquote>
+</li>
+<li>创建远程分支(本地分支push到远程) <code>$ git push origin [name]</code></li>
+<li>删除远程分支 <code>$ git push origin :heads/[name] 或 $ git push origin :[name]</code> </li>
+<li>创建空的分支 (执行命令之前记得先提交你当前分支的修改，否则会被强制删干净)<br>$ git symbolic-ref HEAD refs/heads/[name]<br>$ rm .git/index<br>$ git clean -fdx</li>
+</ul>
+<h2 id="版本-tag-操作相关命令"><a href="#版本-tag-操作相关命令" class="headerlink" title="版本(tag)操作相关命令"></a>版本(tag)操作相关命令</h2><ul>
+<li>查看版本 <code>$ git tag</code></li>
+<li>创建版本 <code>$ git tag [name]</code></li>
+<li>删除版本 <code>$ git tag -d [name]</code></li>
+<li>查看远程版本 <code>$ git tag -r</code></li>
+<li>创建远程版本(本地版本push到远程) <code>$ git push origin [name]</code></li>
+<li>删除远程版本 <code>$ git push origin :refs/tags/[name]</code></li>
+<li>合并远程仓库的tag到本地 <code>$ git pull origin --tags</code></li>
+<li>上传本地tag到远程仓库 <code>$ git push origin --tags</code></li>
+<li>创建带注释的tag <code>$ git tag -a [name] -m &#39;yourMessage&#39;</code></li>
+</ul>
+<h2 id="子模块-submodule-相关操作命令"><a href="#子模块-submodule-相关操作命令" class="headerlink" title="子模块(submodule)相关操作命令"></a>子模块(submodule)相关操作命令</h2><ul>
+<li>添加子模块 <code>$ git submodule add [url] [path]</code><blockquote>
+<p>如：$ git submodule add git://github.com/soberh/ui-libs.git src/main/webapp/ui-libs</p>
+</blockquote>
+</li>
+<li>初始化子模块 <code>$ git submodule init</code> <blockquote>
+<p>—-只在首次检出仓库时运行一次就行</p>
+</blockquote>
+</li>
+<li>更新子模块 <code>$ git submodule update</code><blockquote>
+<p>—-每次更新或切换分支后都需要运行一下</p>
+</blockquote>
+</li>
+<li>删除子模块：（4步）<blockquote>
+<p>1) $ git rm –cached [path]<br>2) 编辑“.gitmodules”文件，将子模块的相关配置节点删除掉<br>3) 编辑“ .git/config”文件，将子模块的相关配置节点删除掉<br>4) 手动删除子模块残留的目录</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="忽略一些文件、文件夹不提交"><a href="#忽略一些文件、文件夹不提交" class="headerlink" title="忽略一些文件、文件夹不提交"></a>忽略一些文件、文件夹不提交</h2><p>在仓库根目录下创建名称为“.gitignore”的文件，写入不需要的文件夹名或文件，每个元素占一行即可，如<br>target<br>bin<br>*.db</p>
+<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><ul>
+<li>删除当前仓库内未受版本管理的文件 <code>$ git clean -f</code></li>
+<li>恢复仓库到上一次的提交状态 <code>$ git reset --hard</code></li>
+<li>回退所有内容到上一个版本 <code>$ git reset HEAD^</code></li>
+<li>回退a.py这个文件的版本到上一个版本 <code>$ git reset HEAD^ a.py</code></li>
+<li>回退到某个版本 <code>$ git reset 057d</code></li>
+<li>将本地的状态回退到和远程的一样 <code>$ git reset –hard origin/master</code> </li>
+<li>向前回退到第3个版本 <code>$ git reset –soft HEAD~3</code></li>
+</ul>
+<h2 id="Git一键推送多个远程仓库"><a href="#Git一键推送多个远程仓库" class="headerlink" title="Git一键推送多个远程仓库"></a>Git一键推送多个远程仓库</h2><p>编辑本地仓库的.git/config文件：<br>[remote “all”]<br>    url = git@github.com:test/test.git<br>    url = git@gitcafe.com:test/test.git<br>这样，使用git push all即可一键Push到多个远程仓库中。</p>
 
       
     </div>
@@ -359,17 +447,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/27/Echarts在地图上添加鼠标交互事件/" rel="next" title="ECharts在地图上添加鼠标交互事件">
-                <i class="fa fa-chevron-left"></i> ECharts在地图上添加鼠标交互事件
+              <a href="/2016/11/11/如何带着智商玩游戏/" rel="next" title="如何带着智商玩游戏">
+                <i class="fa fa-chevron-left"></i> 如何带着智商玩游戏
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/11/hello-world/" rel="prev" title="我的博客是怎样搭建起来的">
-                我的博客是怎样搭建起来的 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -395,8 +479,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/30/commd-git/"
-           data-title="Git常用命令汇总" data-url="http://onetips.com/2016/10/30/commd-git/">
+      <div class="ds-thread" data-thread-key="2016/11/20/commd-git/"
+           data-title="Git常用命令汇总" data-url="http://onetips.com/2016/11/20/commd-git/">
       </div>
     
   </div>
@@ -473,7 +557,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">2.</span> <span class="nav-text">远程仓库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">2.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支-branch-操作相关命令"><span class="nav-number">3.</span> <span class="nav-text">分支(branch)操作相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本-tag-操作相关命令"><span class="nav-number">4.</span> <span class="nav-text">版本(tag)操作相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子模块-submodule-相关操作命令"><span class="nav-number">5.</span> <span class="nav-text">子模块(submodule)相关操作命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忽略一些文件、文件夹不提交"><span class="nav-number">6.</span> <span class="nav-text">忽略一些文件、文件夹不提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复"><span class="nav-number">7.</span> <span class="nav-text">恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git一键推送多个远程仓库"><span class="nav-number">8.</span> <span class="nav-text">Git一键推送多个远程仓库</span></a></li></ol></div>
             
           </div>
         </section>
