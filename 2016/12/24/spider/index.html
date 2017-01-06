@@ -1,0 +1,613 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/libs/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/libs/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nexteve" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="前言12345678910111213141516171819202122232425                     ★                    ／＼                   ／  ＼                  ／    ＼                 ／  &amp;amp;   ＼                ／｡    ｡⁂⸛＼">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs爬虫+express+mongodb小记">
+<meta property="og:url" content="http://onetips.com/2016/12/24/spider/index.html">
+<meta property="og:site_name" content="Nexteve's Blog">
+<meta property="og:description" content="前言12345678910111213141516171819202122232425                     ★                    ／＼                   ／  ＼                  ／    ＼                 ／  &amp;amp;   ＼                ／｡    ｡⁂⸛＼">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider01.png">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider02.png">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider03.png">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider04.png">
+<meta property="og:updated_time" content="2017-01-06T14:11:43.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs爬虫+express+mongodb小记">
+<meta name="twitter:description" content="前言12345678910111213141516171819202122232425                     ★                    ／＼                   ／  ＼                  ／    ＼                 ／  &amp;amp;   ＼                ／｡    ｡⁂⸛＼">
+<meta name="twitter:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://onetips.com/2016/12/24/spider/"/>
+
+
+  <title> nodejs爬虫+express+mongodb小记 | Nexteve's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4056bf7ffa645e8b771d3419827a1843";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Nexteve's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                nodejs爬虫+express+mongodb小记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-24T00:00:00+08:00" content="2016-12-24">
+              2016-12-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/24/spider/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/24/spider/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">                     ★</div><div class="line">                    ／＼</div><div class="line">                   ／  ＼</div><div class="line">                  ／    ＼</div><div class="line">                 ／  &amp;   ＼</div><div class="line">                ／｡    ｡⁂⸛＼</div><div class="line">               ／ ⁂        ＼</div><div class="line">              ／    @⸛ ⸮ ⸮  ＼</div><div class="line">             ／ ⸮  ⸛｡     ｡ i＼</div><div class="line">            ／   ⸮⁂      ⸛ ⁂ i＼</div><div class="line">           ／ ⸮  i   ｡&amp;    @   ＼</div><div class="line">          ／⸮ ⁂ ii  ⸮｡⸛⸛ &amp;⁂ ⸛ i⸛＼</div><div class="line">         ／ ⸛   ⁂⁂  ii⸛    ⸛i⸮   ＼</div><div class="line">        ／ ｡i⁂ @ ⁂      ｡     ⸮   ＼</div><div class="line">       ／  i  ⁂ i       @i ⸛  ⸮  ⸛⁂＼</div><div class="line">      ／      i   @ ⸮@i@｡  ⁂ ⸮ &amp;⸮⸮ ｡＼</div><div class="line">     ／    ⸛⸛ ｡⸮   @  ⸛  ⁂ ｡ ⸮⸛｡  @ ｡＼</div><div class="line">    ／ i  ⁂   i           i&amp;&amp;      ⸛⸛｡＼</div><div class="line">   ／     ｡⸛⸛ ⸮ @  @&amp;｡   ⸛⸛  ｡⸮     ⸮@ ＼</div><div class="line">  ／  &amp;  i ⸛        ⸮  i ⸮   ｡   @ ｡⸛   ＼</div><div class="line"> ／@     &amp;   ｡  ⸮   i &amp; ⸮ &amp;  ⸮ ⁂ ⸮ ⸮   @@＼</div><div class="line"> ^^^^^^^^^^^^^^^^^^^|  |^^^^^^^^^^^^^^^^^^^</div><div class="line">                    |  |                   </div><div class="line"></div><div class="line">npm loves you Happy Xmas, Noders!</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>看了那么多python爬虫的教程，我也准备用nodejs写一个玩玩。</p>
+<p>首先确定一下要爬的目标站（我上B站比较多，就爬B站鬼畜区好了）</p>
+<blockquote>
+<p><a href="http://www.bilibili.com/video/ent-Kichiku-1.html#!page=1&amp;range=2016-12-01%2C2016-12-20&amp;order=hot" target="_blank" rel="external">http://www.bilibili.com/video/ent-Kichiku-1.html#!page=1&amp;range=2016-12-01%2C2016-12-20&amp;order=hot</a></p>
+</blockquote>
+<p>看到一个鬼畜区可以筛选的地方。</p>
+<p>打开熟悉的F12（手动滑稽）<br>经过点击选择不同的时间段，发现了network里请求了一些鬼鬼祟祟的html<br>长这样<br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider01.png" alt="show"></p>
+<p>然后把这个url输入地址栏直接请求。发现确实得到了想要的数据<br>这里播放量，弹幕数量和收藏数量等数据都有<br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider02.png" alt="show"><br>这里插一句话，就是对这个url的解释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">http://www.bilibili.com/list/hot-22-1-2016-12-01~2016-12-20.html</div><div class="line">hot是指热门的排行，从播放量来排的</div><div class="line">hot后面的22是指鬼畜区的id，我换成20请求就变成舞蹈区了</div><div class="line">22后面的1是指页数，每页有20个数据</div><div class="line">1后面的很简单啦，就是个时间范围，B站能请求最近三个月的数据</div></pre></td></tr></table></figure></p>
+<p>好了继续，再次打开F12这次要做的是检查DOM结构<br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider03.png" alt="show"><br>可以看出dom结构，数据基本都在<code>class=&quot;l-item&quot;</code>的<code>&lt;li&gt;</code>标签里了<br>分析就算分析完了，准备上手！</p>
+<h2 id="编码分析"><a href="#编码分析" class="headerlink" title="编码分析"></a>编码分析</h2><p>爬虫这里我调用了<code>superagent</code>和<code>cheerio</code>两个库，其中superagent是做请求用的。cheerio是解析dom操作用的（类似前端jquery）<br>那么爬到的数据要怎么存起来？这里我用到了mongodb<br>再安装mongodb的数据库连接组件mongodb<br>将爬到的数据统统存起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">function init() &#123;</div><div class="line">	var date = new Date();</div><div class="line">	var startdate = get_end_time();</div><div class="line">	var enddate = date.getUTCFullYear() + &quot;-&quot; + (date.getUTCMonth() + 1) + &quot;-&quot; + date.getUTCDate();</div><div class="line">	var targetUrl = &apos;http://www.bilibili.com/list/hot-22-&apos; + i + &apos;-&apos; + startdate + &apos;~&apos; + enddate + &apos;.html&apos;;</div><div class="line">	db.open(function() &#123;</div><div class="line">		db.collection(&apos;bilibili&apos;, function(err, collection) &#123;</div><div class="line">			for (var i = 1; i &lt; 11; i++) &#123;</div><div class="line">				superagent.get(targetUrl).end(function(err, res) &#123;</div><div class="line">					var $ = cheerio.load(res.text);</div><div class="line">					$(&apos;li .l-item&apos;).each(function(idx, element) &#123;</div><div class="line">						var $element = $(element);</div><div class="line">						var pic_and_cdn = $element[&apos;0&apos;].children[1].children[1].children[1].attribs;</div><div class="line">						var link = $element[&apos;0&apos;].children[1].children[3].attribs;</div><div class="line">						var desc = $element[&apos;0&apos;].children[3].children[1].children[0].data;</div><div class="line">						var play = $element[&apos;0&apos;].children[3].children[3].children[1].children[1].children[0].data;</div><div class="line">						var dm = $element[&apos;0&apos;].children[3].children[3].children[3].children[1].children[0].data;</div><div class="line">						var sc = $element[&apos;0&apos;].children[3].children[3].children[5].children[1].children[0].data;</div><div class="line">						var up_name = $element[&apos;0&apos;].children[3].children[5].children[1].attribs;</div><div class="line">						var up_time = $element[&apos;0&apos;].children[3].children[5].children[2].children[0].data;</div><div class="line">						var data = &#123;&#125;;</div><div class="line">						data.picurl = pic_and_cdn[&apos;data-img&apos;];</div><div class="line">						data.title = pic_and_cdn.alt;</div><div class="line">						data.link = link;</div><div class="line">						data.desc = desc;</div><div class="line">						data.play = parseInt(play);</div><div class="line">						data.dm = parseInt(dm);</div><div class="line">						data.sc = parseInt(sc);</div><div class="line">						data.up_info = up_name;</div><div class="line">						data.up_time = up_time;</div><div class="line">						collection.insert(data, function(err, data) &#123;</div><div class="line">							if (data) &#123;</div><div class="line">								console.log(&apos;Successfully Insert&apos;);</div><div class="line">							&#125; else &#123;</div><div class="line">								console.log(&apos;Failed to Insert&apos;);</div><div class="line">							&#125;</div><div class="line">						&#125;);</div><div class="line">					&#125;)</div><div class="line">				&#125;)</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line"></div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function get_end_time() &#123;</div><div class="line">	var now = new Date();</div><div class="line">	var start = &quot;&quot;;</div><div class="line">	var year = now.getUTCFullYear();</div><div class="line">	var month = now.getUTCMonth();</div><div class="line">	var day = now.getUTCDate();</div><div class="line">	if (now.getUTCMonth() &lt; 3) &#123;</div><div class="line">		start = (year - 1) + &quot;-&quot; + (14 - month) + &quot;-&quot; + (day + 1);</div><div class="line">	&#125; else &#123;</div><div class="line">		start = year + &quot;-&quot; + (month - 2) + &quot;-&quot; + (day + 1) ;</div><div class="line">	&#125;</div><div class="line">	return start</div><div class="line">&#125;</div><div class="line">init();</div></pre></td></tr></table></figure></p>
+<p>这样相当于每次爬了10页，200条数据<br>执行一次去看数据库吧<br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/spider04.png" alt="show"><br>效果还不错，那么有了这些数据应该怎么用呢？<br>下节再说（眨眼）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward.png" alt="Nexteve WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/20/ngjs/" rel="next" title="angularJS常用技巧">
+                <i class="fa fa-chevron-left"></i> angularJS常用技巧
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/24/spider/"
+           data-title="nodejs爬虫+express+mongodb小记" data-url="http://onetips.com/2016/12/24/spider/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Nexteve" />
+          <p class="site-author-name" itemprop="name">Nexteve</p>
+          <p class="site-description motion-element" itemprop="description">走在勇往直前的路上</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码分析"><span class="nav-number">3.</span> <span class="nav-text">编码分析</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nexteve</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/libs/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/libs/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/libs/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/libs/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/libs/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/libs/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"onetips"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
