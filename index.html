@@ -743,36 +743,15 @@
 
       
         
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>因为工作的原因要经常浏览google,github或者等等你觉得ta没有被墙可就是访问不了的。怎么办！！</p>
 </blockquote>
 <p>这时候就需要一个科学上网的工具来帮助你学习知识(滑稽)</p>
-<h3 id="第一步，购买vps机器"><a href="#第一步，购买vps机器" class="headerlink" title="第一步，购买vps机器"></a>第一步，购买vps机器</h3><p>感觉很多人都是在搬瓦工买的，也算是比较便宜。<br>我是在OPENVZVPS买的78/年(现在已经没有该档)。</p>
-<p>具体参数如下</p>
-<ul>
-<li>128M内存</li>
-<li>20G硬盘</li>
-<li>750G月流量</li>
-<li>单核CPU</li>
-</ul>
-<p>买了之后装Debian系统，版本最好是vps运营商提供的最新版。</p>
-<h3 id="第二步，连接vps机器"><a href="#第二步，连接vps机器" class="headerlink" title="第二步，连接vps机器"></a>第二步，连接vps机器</h3><p>通过ssh连上vps的22端口之后先不要急着干其他事情</p>
-<p>先执行<code>apt-get update</code></p>
-<p>接下来我们去修改ssh的端口：</p>
-<p>在<code>etc/ssh/</code>目录下打开sshd_config文件</p>
-<p>如图<br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/8B3B.tmp.jpg" alt="show"></p>
-<p>在port后面把默认的22端口改为自己想要的端口。</p>
-<p>然后保存退出</p>
-<p>(改端口当然是为了别有用心的人对你的22端口爆破呀)</p>
-<p>退出通过新修改的端口登录vps</p>
-<h3 id="第三步，安装shadowsocks服务端"><a href="#第三步，安装shadowsocks服务端" class="headerlink" title="第三步，安装shadowsocks服务端"></a>第三步，安装shadowsocks服务端</h3><p>执行<code>apt-get install shadowsocks</code></p>
-<p>等待shadowsocks安装好之后就可以写入配置文件了</p>
-<p>在 <code>etc/shadowsocks/</code>目录下创建一个config.json</p>
-<p>写入以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;server&quot;:&quot;0.0.0.0&quot;,</div><div class="line">    &quot;server_port&quot;:xxxx,</div><div class="line">    &quot;local_address&quot;: &quot;127.0.0.1&quot;,</div><div class="line">    &quot;local_port&quot;:1080,</div><div class="line">    &quot;password&quot;:&quot;password&quot;,</div><div class="line">    &quot;timeout&quot;:60,</div><div class="line">    &quot;method&quot;:&quot;aes-256-cfb&quot;,</div><div class="line">    &quot;fast_open&quot;: false,</div><div class="line">    &quot;workers&quot;: 10</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>其中server_port</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/13/shadowsocks/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
