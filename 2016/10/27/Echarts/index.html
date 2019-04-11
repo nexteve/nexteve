@@ -1,0 +1,638 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/libs/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/libs/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nexteve" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="前言
+ECharts，一个纯 Javascript 的图表库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari等），底层依赖轻量级的 Canvas 类库 ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。
+
+以上都引用自ECharts官网23333一般来说，可以用来生成图表或者做数据可视化的前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECharts在地图上添加鼠标交互事件">
+<meta property="og:url" content="http://onetips.com/2016/10/27/Echarts/index.html">
+<meta property="og:site_name" content="Nexteve's Blog">
+<meta property="og:description" content="前言
+ECharts，一个纯 Javascript 的图表库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari等），底层依赖轻量级的 Canvas 类库 ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。
+
+以上都引用自ECharts官网23333一般来说，可以用来生成图表或者做数据可视化的前端">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/AE4B.tmp.jpg">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/EE32.tmp.jpg">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/8324.tmp.jpg">
+<meta property="og:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/7B41.tmp.jpg">
+<meta property="og:updated_time" content="2016-11-02T10:48:25.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ECharts在地图上添加鼠标交互事件">
+<meta name="twitter:description" content="前言
+ECharts，一个纯 Javascript 的图表库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari等），底层依赖轻量级的 Canvas 类库 ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。
+
+以上都引用自ECharts官网23333一般来说，可以用来生成图表或者做数据可视化的前端">
+<meta name="twitter:image" content="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/AE4B.tmp.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://onetips.com/2016/10/27/Echarts/"/>
+
+
+  <title> ECharts在地图上添加鼠标交互事件 | Nexteve's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4056bf7ffa645e8b771d3419827a1843";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Nexteve's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ECharts在地图上添加鼠标交互事件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-27T00:00:00+08:00" content="2016-10-27">
+              2016-10-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/27/Echarts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/27/Echarts/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>ECharts，一个纯 Javascript 的图表库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari等），底层依赖轻量级的 Canvas 类库 ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。</p>
+</blockquote>
+<p>以上都引用自ECharts官网23333<br>一般来说，可以用来生成图表或者做数据可视化的前端JS库有很多。比如Highcharts，chartjs，还有JQ的一些图表插件。<br>这里就拿比较中规中矩的国产良心来探讨</p>
+<a id="more"></a>
+<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>首先引入我们构建好的<code>地图数据文件</code>和<code>Echart库</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 引入 ECharts 文件 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"echarts.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 引入 地图数据 文件 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"shanxi.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里说一下<code>地图数据文件</code>可以是js文件也可以是json文件</p>
+<p><a href="http://echarts.baidu.com/download-map.html" target="_blank">戳我下载</a></p>
+<p>接下来准备一个具备高宽的 DOM 容器。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 为 ECharts 准备一个具备大小（宽高）的 DOM --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"main"</span> <span class="attr">style</span>=<span class="string">"width: 600px;height:400px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>好了我们准备工作完成。</p>
+<h2 id="创建图表"><a href="#创建图表" class="headerlink" title="创建图表"></a>创建图表</h2><h3 id="初始化Echarts"><a href="#初始化Echarts" class="headerlink" title="初始化Echarts"></a>初始化Echarts</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myChart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>));</div></pre></td></tr></table></figure>
+<h3 id="定义图表要展示的数据"><a href="#定义图表要展示的数据" class="headerlink" title="定义图表要展示的数据"></a>定义图表要展示的数据</h3><p>此处使用随机数据<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getrandom</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">300</span> + <span class="number">100</span>);</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">var</span> data = [&#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'咸阳'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'铜川'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'西安'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'渭南'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'宝鸡'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'延安'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'汉中'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'榆林'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'安康'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;, &#123;</div><div class="line">         <span class="attr">name</span>: <span class="string">'商洛'</span>,</div><div class="line">         <span class="attr">value</span>: getrandom()</div><div class="line">     &#125;];</div></pre></td></tr></table></figure></p>
+<h3 id="定义地图中的地理位置信息"><a href="#定义地图中的地理位置信息" class="headerlink" title="定义地图中的地理位置信息"></a>定义地图中的地理位置信息</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> geoCoordMap = &#123;</div><div class="line">          <span class="string">'咸阳'</span>: [<span class="number">108.72</span>, <span class="number">34.36</span>],</div><div class="line">          <span class="string">'铜川'</span>: [<span class="number">109.11</span>, <span class="number">35.09</span>],</div><div class="line">          <span class="string">'西安'</span>: [<span class="number">108.95</span>, <span class="number">34.27</span>],</div><div class="line">          <span class="string">'渭南'</span>: [<span class="number">109.5</span>, <span class="number">34.52</span>],</div><div class="line">          <span class="string">'宝鸡'</span>: [<span class="number">107.15</span>, <span class="number">34.38</span>],</div><div class="line">          <span class="string">'延安'</span>: [<span class="number">109.48</span>, <span class="number">36.6</span>],</div><div class="line">          <span class="string">'汉中'</span>: [<span class="number">107.02</span>, <span class="number">33.07</span>],</div><div class="line">          <span class="string">'榆林'</span>: [<span class="number">109.73</span>, <span class="number">38.28</span>],</div><div class="line">          <span class="string">'安康'</span>: [<span class="number">109.02</span>, <span class="number">32.68</span>],</div><div class="line">          <span class="string">'商洛'</span>: [<span class="number">109.93</span>, <span class="number">33.87</span>]</div><div class="line">      &#125;;</div></pre></td></tr></table></figure>
+<p>这里key对应的value数组里是该key的经纬度。</p>
+<h3 id="数据转换函数"><a href="#数据转换函数" class="headerlink" title="数据转换函数"></a>数据转换函数</h3><p>因为这类图表最终要输入的数据是这样子的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">data=[</div><div class="line">	&#123;</div><div class="line">	<span class="string">"name"</span>:<span class="string">"xx"</span>,</div><div class="line">	<span class="string">"value"</span>:[经度,纬度,值]</div><div class="line">	&#125;</div><div class="line">    ]</div></pre></td></tr></table></figure></p>
+<p>所以我们要对上面要显示的数据和地理位置数据做下整合处理<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> convertData = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> res = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</div><div class="line">      <span class="keyword">var</span> geoCoord = geoCoordMap[data[i].name];</div><div class="line">      <span class="keyword">if</span> (geoCoord) &#123;</div><div class="line">          res.push(&#123;</div><div class="line">              <span class="attr">name</span>: data[i].name,</div><div class="line">              <span class="attr">value</span>: geoCoord.concat(data[i].value)</div><div class="line">          &#125;);</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="图表主函数"><a href="#图表主函数" class="headerlink" title="图表主函数"></a>图表主函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">option = &#123;</div><div class="line">    <span class="attr">backgroundColor</span>: <span class="string">'transparent'</span>,<span class="comment">//设置背景为透明</span></div><div class="line">    title: &#123;</div><div class="line">        <span class="attr">text</span>: <span class="string">''</span>,</div><div class="line">        <span class="attr">textStyle</span>: &#123;</div><div class="line">            <span class="attr">color</span>: <span class="string">'#fff'</span></div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">tooltip</span>: &#123;</div><div class="line">        <span class="attr">trigger</span>: <span class="string">'item'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">legend</span>: &#123;</div><div class="line">        <span class="attr">orient</span>: <span class="string">'vertical'</span>,</div><div class="line">        <span class="attr">y</span>: <span class="string">'bottom'</span>,</div><div class="line">        <span class="attr">x</span>: <span class="string">'right'</span>,</div><div class="line">        <span class="attr">data</span>: [<span class="string">'pm2.5'</span>],</div><div class="line">        <span class="attr">textStyle</span>: &#123;</div><div class="line">            <span class="attr">color</span>: <span class="string">'#fff'</span></div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">geo</span>: &#123;</div><div class="line">        <span class="attr">map</span>: <span class="string">'陕西'</span>,<span class="comment">//这里必须和地图数据文件名字一样</span></div><div class="line">        label: &#123;</div><div class="line">            <span class="attr">emphasis</span>: &#123;</div><div class="line">                <span class="attr">show</span>: <span class="literal">false</span></div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">roam</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">itemStyle</span>: &#123;</div><div class="line">            <span class="attr">normal</span>: &#123;</div><div class="line">                <span class="attr">areaColor</span>: <span class="string">'#666666'</span>,</div><div class="line">                <span class="attr">borderColor</span>: <span class="string">'#111'</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">emphasis</span>: &#123;</div><div class="line">                <span class="attr">areaColor</span>: <span class="string">'#2a333d'</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">series</span>: [&#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">'危害数量'</span>,<span class="comment">//这里是有数据的点</span></div><div class="line">        type: <span class="string">'scatter'</span>,</div><div class="line">        <span class="attr">coordinateSystem</span>: <span class="string">'geo'</span>,</div><div class="line">        <span class="attr">data</span>: convertData(data),</div><div class="line">        <span class="attr">symbolSize</span>: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> val[<span class="number">2</span>] / <span class="number">10</span>;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">label</span>: &#123;</div><div class="line">            <span class="attr">normal</span>: &#123;</div><div class="line">                <span class="attr">formatter</span>: <span class="string">'&#123;b&#125;'</span>,</div><div class="line">                <span class="attr">position</span>: <span class="string">'right'</span>,</div><div class="line">                <span class="attr">show</span>: <span class="literal">false</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">emphasis</span>: &#123;</div><div class="line">                <span class="attr">show</span>: <span class="literal">true</span></div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">itemStyle</span>: &#123;</div><div class="line">            <span class="attr">normal</span>: &#123;</div><div class="line">                <span class="attr">color</span>: <span class="string">'#ddb926'</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;, &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">'Top 5'</span>,<span class="comment">//这里做了数据比较大的5个点的TOP5效果</span></div><div class="line">        type: <span class="string">'effectScatter'</span>,</div><div class="line">        <span class="attr">coordinateSystem</span>: <span class="string">'geo'</span>,</div><div class="line">        <span class="attr">data</span>: convertData(data.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> b.value - a.value;</div><div class="line">        &#125;).slice(<span class="number">0</span>, <span class="number">5</span>)),</div><div class="line">        <span class="attr">symbolSize</span>: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> val[<span class="number">2</span>] / <span class="number">10</span>;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">showEffectOn</span>: <span class="string">'render'</span>,</div><div class="line">        <span class="attr">rippleEffect</span>: &#123;</div><div class="line">            <span class="attr">brushType</span>: <span class="string">'stroke'</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">hoverAnimation</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">label</span>: &#123;</div><div class="line">            <span class="attr">normal</span>: &#123;</div><div class="line">                <span class="attr">formatter</span>: <span class="string">'&#123;b&#125;'</span>,</div><div class="line">                <span class="attr">position</span>: <span class="string">'right'</span>,</div><div class="line">                <span class="attr">show</span>: <span class="literal">true</span></div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">itemStyle</span>: &#123;</div><div class="line">            <span class="attr">normal</span>: &#123;</div><div class="line">                <span class="attr">color</span>: <span class="string">'red'</span>,</div><div class="line">                <span class="attr">shadowBlur</span>: <span class="number">10</span>,</div><div class="line">                <span class="attr">shadowColor</span>: <span class="string">'#333'</span></div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">zlevel</span>: <span class="number">1</span></div><div class="line">    &#125;]</div><div class="line">&#125;;</div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
+<p>写到这里呢，如果没有交互的话，我们的项目(纯展示目的)就已经完成了。整个图大概长这样<br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/AE4B.tmp.jpg" alt="show"><br>但是不加交互跟咸鱼有什么区别！！！(手动滑稽)</p>
+<h3 id="地图交互"><a href="#地图交互" class="headerlink" title="地图交互"></a>地图交互</h3><p>经过查api我发现了事件监听处理<br>长这样<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">myChart.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (params.componentType === <span class="string">'series'</span>) &#123;</div><div class="line">         <span class="comment">//do something</span></div><div class="line">      &#125; </div><div class="line">  &#125;);</div></pre></td></tr></table></figure></p>
+<p>那这里的<code>params.componentType</code>简单解释就是如果点击在数据点上，那么<code>params.componentType===&#39;series&#39;</code><br>如果点在地图上没有数据点的地方那么<code>params.componentType===&#39;geo&#39;</code><br>好了那么我们可以搞点大新闻了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">myChart.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (params.componentType === <span class="string">'series'</span>) &#123;</div><div class="line">        showlabel(params.data.name, params.data.value[<span class="number">2</span>])</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (params.componentType === <span class="string">'geo'</span>) &#123;</div><div class="line">        <span class="built_in">console</span>.log(geoCoordMap[params.name])</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>我这里写了一个处理点击到数据点的方法<br>如果点击数据点，会出现其他展示方式的信息<br>它长这样<br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/EE32.tmp.jpg" alt="show"></p>
+<p>好了基本就是这么多啦</p>
+<h2 id="最后放一张项目的全景"><a href="#最后放一张项目的全景" class="headerlink" title="最后放一张项目的全景"></a>最后放一张项目的全景</h2><p><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/8324.tmp.jpg" alt="show"><br><img src="http://nextevenewbucket.oss-cn-qingdao.aliyuncs.com/7B41.tmp.jpg" alt="show"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward.png" alt="Nexteve WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/22/netease/" rel="next" title="如何带着智商玩游戏">
+                <i class="fa fa-chevron-left"></i> 如何带着智商玩游戏
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/20/commd-git/" rel="prev" title="Git常用命令汇总">
+                Git常用命令汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/27/Echarts/"
+           data-title="ECharts在地图上添加鼠标交互事件" data-url="http://onetips.com/2016/10/27/Echarts/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Nexteve" />
+          <p class="site-author-name" itemprop="name">Nexteve</p>
+          <p class="site-description motion-element" itemprop="description">走在勇往直前的路上</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建"><span class="nav-number">2.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建图表"><span class="nav-number">3.</span> <span class="nav-text">创建图表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化Echarts"><span class="nav-number">3.1.</span> <span class="nav-text">初始化Echarts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义图表要展示的数据"><span class="nav-number">3.2.</span> <span class="nav-text">定义图表要展示的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义地图中的地理位置信息"><span class="nav-number">3.3.</span> <span class="nav-text">定义地图中的地理位置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据转换函数"><span class="nav-number">3.4.</span> <span class="nav-text">数据转换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图表主函数"><span class="nav-number">3.5.</span> <span class="nav-text">图表主函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地图交互"><span class="nav-number">3.6.</span> <span class="nav-text">地图交互</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后放一张项目的全景"><span class="nav-number">4.</span> <span class="nav-text">最后放一张项目的全景</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nexteve</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/libs/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/libs/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/libs/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/libs/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/libs/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/libs/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"onetips"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

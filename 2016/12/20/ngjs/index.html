@@ -1,0 +1,624 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/libs/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/libs/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nexteve" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="前言在angularJS项目的开发过程中可能时常与遇到一些小小的问题今天记录一下之前遇到的一些小问题和一些解决方案
+angularJS与JQ渲染的冲突问题在angluarJS项目的开发过程中，经常会遇到这样的问题
+一些需要JQ插件来渲染的东西是由ng-repeat出来的，这时就会出现JQ渲染失效的问题。
+原因是，在DOM加载完成后就直接把JQ执行了。而这时angluarJS还没有将相关的DOM渲染">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularJS常用技巧">
+<meta property="og:url" content="http://onetips.com/2016/12/20/ngjs/index.html">
+<meta property="og:site_name" content="Nexteve's Blog">
+<meta property="og:description" content="前言在angularJS项目的开发过程中可能时常与遇到一些小小的问题今天记录一下之前遇到的一些小问题和一些解决方案
+angularJS与JQ渲染的冲突问题在angluarJS项目的开发过程中，经常会遇到这样的问题
+一些需要JQ插件来渲染的东西是由ng-repeat出来的，这时就会出现JQ渲染失效的问题。
+原因是，在DOM加载完成后就直接把JQ执行了。而这时angluarJS还没有将相关的DOM渲染">
+<meta property="og:updated_time" content="2017-01-06T11:20:37.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularJS常用技巧">
+<meta name="twitter:description" content="前言在angularJS项目的开发过程中可能时常与遇到一些小小的问题今天记录一下之前遇到的一些小问题和一些解决方案
+angularJS与JQ渲染的冲突问题在angluarJS项目的开发过程中，经常会遇到这样的问题
+一些需要JQ插件来渲染的东西是由ng-repeat出来的，这时就会出现JQ渲染失效的问题。
+原因是，在DOM加载完成后就直接把JQ执行了。而这时angluarJS还没有将相关的DOM渲染">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://onetips.com/2016/12/20/ngjs/"/>
+
+
+  <title> angularJS常用技巧 | Nexteve's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4056bf7ffa645e8b771d3419827a1843";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Nexteve's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                angularJS常用技巧
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-20T00:00:00+08:00" content="2016-12-20">
+              2016-12-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/20/ngjs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/20/ngjs/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在angularJS项目的开发过程中可能时常与遇到一些小小的问题<br>今天记录一下之前遇到的一些小问题和一些解决方案</p>
+<h2 id="angularJS与JQ渲染的冲突问题"><a href="#angularJS与JQ渲染的冲突问题" class="headerlink" title="angularJS与JQ渲染的冲突问题"></a>angularJS与JQ渲染的冲突问题</h2><p>在angluarJS项目的开发过程中，经常会遇到这样的问题</p>
+<p>一些需要JQ插件来渲染的东西是由ng-repeat出来的，这时就会出现JQ渲染失效的问题。</p>
+<p>原因是，在DOM加载完成后就直接把JQ执行了。而这时angluarJS还没有将相关的DOM渲染出来，所以JQ拿不到相关的DOM就渲染不出效果了。</p>
+<p>解决办法是：</p>
+<a id="more"></a>
+<h3 id="ng-repeat监听器"><a href="#ng-repeat监听器" class="headerlink" title="ng-repeat监听器"></a>ng-repeat监听器</h3><p>我们需要为当前的app自定义directive:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.directive(&apos;onFinishRender&apos;, function ($timeout) &#123;  return &#123;</div><div class="line">    restrict: &apos;A&apos;,</div><div class="line">    link: function(scope, element, attr) &#123;</div><div class="line">      if (scope.$last === true) &#123;</div><div class="line">        $timeout(function() &#123;</div><div class="line">          scope.$emit(&apos;ngRepeatFinished&apos;);</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>然后，在我们需要监控的地方，加上该directive:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;tr  ng-repeat=&quot;node in nodes.tasks&quot; on-finish-render&gt;</div><div class="line">      &lt;td&gt;&#123;&#123;node.Id&#125;&#125;&lt;/td&gt;</div><div class="line">      &lt;td&gt;&#123;&#123;node.Name&#125;&#125;&lt;/td&gt;</div><div class="line">&lt;/tr&gt;</div></pre></td></tr></table></figure></p>
+<p>最后，补充上我们需要render完成之后的Js脚本:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$scope.$on(&apos;ngRepeatFinished&apos;, function (ngRepeatFinishedEvent) &#123;</div><div class="line">          //下面是repeat完成后要执行的js脚本</div><div class="line">          console.log(&quot;我已经循环完毕啦！&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="将该JQ插件封装成angluarJS的module"><a href="#将该JQ插件封装成angluarJS的module" class="headerlink" title="将该JQ插件封装成angluarJS的module"></a>将该JQ插件封装成angluarJS的module</h3><blockquote>
+<p>不做过多描述，比较高端比较麻烦的技巧，但是比较一劳永逸</p>
+</blockquote>
+<h2 id="自定义Enter事件的指令"><a href="#自定义Enter事件的指令" class="headerlink" title="自定义Enter事件的指令"></a>自定义Enter事件的指令</h2><p>一般为了简化用户操作，采用键盘上的Enter事件来提交表单(我用的restful不用表单)<br>自定义directive:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">app.directive(&apos;myEnter&apos;, function() &#123;</div><div class="line">	return function(scope, element, attrs) &#123;</div><div class="line">		element.bind(&quot;keydown keypress&quot;, function(event) &#123;</div><div class="line">			if (event.which === 13) &#123;</div><div class="line">				scope.$apply(function() &#123;</div><div class="line">					scope.$eval(attrs.myEnter);</div><div class="line">				&#125;);</div><div class="line">				event.preventDefault();</div><div class="line">			&#125;;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>当然你也可以指定任意一个按键（手动滑稽）<br>然后在需要触发的input标签上绑定事件即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=&quot;text&quot; class=&quot;myinput&quot;  ng-model=&quot;selfscore&quot;  my-enter=&quot;ChangeNum()&quot;&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="定义factory为请求增加动画效果"><a href="#定义factory为请求增加动画效果" class="headerlink" title="定义factory为请求增加动画效果"></a>定义factory为请求增加动画效果</h2><p>向服务器请求时如果有响应的动画那是极好的，在ng里可以获取http请求中request和response的状态<br>话不多说直接上代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">app.factory(&apos;myInterceptor&apos;, [&apos;$q&apos;, function($q) &#123;</div><div class="line">	var responseInterceptor = &#123;</div><div class="line">		&apos;request&apos;: function(config) &#123;</div><div class="line">			app.loading = true;</div><div class="line">			//加载中...</div><div class="line">			loading();</div><div class="line">			return config;</div><div class="line">		&#125;,</div><div class="line">		&apos;response&apos;: function(resp) &#123;</div><div class="line">			app.loading = false;</div><div class="line">			//加载结束</div><div class="line">			loadover();</div><div class="line">			return resp;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	return responseInterceptor;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure></p>
+<p>这样我们就可以加相应的动画来展示<br>当然如果你愿意也可以把加载结果也添加到动画里</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward.png" alt="Nexteve WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/20/commd-git/" rel="next" title="Git常用命令汇总">
+                <i class="fa fa-chevron-left"></i> Git常用命令汇总
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/25/spider/" rel="prev" title="nodejs爬虫+express+mongodb小记（一）">
+                nodejs爬虫+express+mongodb小记（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/20/ngjs/"
+           data-title="angularJS常用技巧" data-url="http://onetips.com/2016/12/20/ngjs/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Nexteve" />
+          <p class="site-author-name" itemprop="name">Nexteve</p>
+          <p class="site-description motion-element" itemprop="description">走在勇往直前的路上</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#angularJS与JQ渲染的冲突问题"><span class="nav-number">2.</span> <span class="nav-text">angularJS与JQ渲染的冲突问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ng-repeat监听器"><span class="nav-number">2.1.</span> <span class="nav-text">ng-repeat监听器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将该JQ插件封装成angluarJS的module"><span class="nav-number">2.2.</span> <span class="nav-text">将该JQ插件封装成angluarJS的module</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义Enter事件的指令"><span class="nav-number">3.</span> <span class="nav-text">自定义Enter事件的指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义factory为请求增加动画效果"><span class="nav-number">4.</span> <span class="nav-text">定义factory为请求增加动画效果</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nexteve</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/libs/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/libs/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/libs/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/libs/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/libs/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/libs/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"onetips"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
